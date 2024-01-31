@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ondc-api-gcp-lb-service
+  namespace: namaste
+  labels:
+    app.kubernetes.io/name: ondc-api
+  annotations:
+    cloud.google.com/backend-config: '{"default": "ondc-api-backend-config"}'
+spec:
+  type: NodePort
+  selector:
+    role: ondc-api
+    env: production
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 4000

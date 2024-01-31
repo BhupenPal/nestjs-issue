@@ -1,0 +1,55 @@
+version: '3.9'
+name: 'seller-platform'
+
+services:
+  redis:
+    container_name: sp_redis
+    image: redis:7.2.3-alpine
+    restart: always
+    volumes:
+      - ./docker/.data/redis:/data
+    ports:
+      - 6379:6379
+    command: redis-server --save 20 1 --loglevel warning
+    networks:
+      - sp_common_net
+
+  rabbitmq:
+    container_name: sp_rabbit_broker
+    image: rabbitmq:3.12-management-alpine
+    restart: always
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ./docker/.data/:/var/lib/rabbitmq
+      - ./docker/.logs/:/var/log/rabbitmq
+    networks:
+      - sp_common_net
+
+  sp_api:
+    container_name: seller_platform_server
+    restart: always
+    user: node
+    command: pnpm start:dev
+    volumes:
+      - .:/app
+      - /app/node_modules
+    networks:
+      - sp_common_net
+    build:
+      context: .
+      target: development
+    env_file:
+      - .env
+    environment:
+      RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672/
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      - rabbitmq
+      - redis
+    ports:
+      - 4000:4000
+
+networks:
+  sp_common_net:

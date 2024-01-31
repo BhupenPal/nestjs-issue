@@ -1,0 +1,59 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: ondc-api
+  namespace: namaste
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  minReadySeconds: 5
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      role: ondc-api
+      env: production
+  template:
+    metadata:
+      name: ondc-api
+      labels:
+        role: ondc-api
+        env: production
+    spec:
+      containers:
+        - image: asia-south1-docker.pkg.dev/maha-mela/core/ondc-api:latest
+          name: ondc-api
+          envFrom:
+            - configMapRef:
+                name: prod-ondc-env
+          ports:
+            - name: http-server
+              containerPort: 4000
+          readinessProbe:
+            httpGet:
+              path: /health-check
+              port: http-server
+            initialDelaySeconds: 30
+            failureThreshold: 3
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          livenessProbe:
+            httpGet:
+              path: /health-check
+              port: http-server
+            initialDelaySeconds: 30
+            failureThreshold: 5
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            requests:
+              cpu: 50m
+              memory: 500Mi
+            limits:
+              cpu: 200m
+              memory: 1Gi

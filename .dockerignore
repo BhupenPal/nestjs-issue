@@ -1,0 +1,72 @@
+# Environment variables
+*.env
+*.env.local
+*.env.prod
+
+# Nginx
+nginx/nginx.prod.conf
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Documentation
+docs
+*.md
+
+# Coverage directory used by tools like istanbul
+coverage
+
+# nyc test coverage
+.nyc_output
+
+# Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
+.grunt
+
+# node-waf configuration
+.lock-wscript
+
+# Dependency directories
+node_modules
+jspm_packages
+
+# Optional npm cache directory
+.npm
+
+# Optional REPL history
+.node_repl_history
+
+# Dist folder (code after build)
+dist
+
+# Project file
+*.sublime-project
+*.sublime-workspace
+
+# Git file
+.git
+.gitignore
+.gitkeep
+.gitattributes
+
+# Docker file
+docker/.data
+*Dockerfile*
+*docker-compose*
+docker-compose.yml
+
+# Deploy folder and file
+deploy
+.gitlab-ci.yml
+
+# Linter
+.eslint*
+.prettier*
+
+# Devops
+.husky
+.ssh
+
+# Paseto secret generator
+paseto.secrets.ts

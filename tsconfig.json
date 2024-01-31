@@ -1,0 +1,56 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "module": "CommonJS",
+    "outDir": "./dist",
+    "target": "ES2022",
+    "allowSyntheticDefaultImports": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "alwaysStrict": true,
+    "declaration": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "exactOptionalPropertyTypes": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "incremental": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "removeComments": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "strictBindCallApply": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "useUnknownInCatchVariables": true,
+    "paths": {
+      // ROOT DIRECTORIES
+      "@root": ["src"],
+      "@root/*": ["src/*"],
+      "@integrations": ["integrations"],
+      "@integrations/*": ["integrations/*"],
+
+      // LIBS
+      "@libs/environment": ["libs/environment/src"],
+      "@libs/environment/*": ["libs/environment/src/*"],
+      "@libs/mongodb": ["libs/mongodb/src"],
+      "@libs/mongodb/*": ["libs/mongodb/src/*"],
+      "@libs/rabbitmq": ["libs/rabbitmq/src"],
+      "@libs/rabbitmq/*": ["libs/rabbitmq/src/*"],
+      "@libs/redis": ["libs/redis/src"],
+      "@libs/redis/*": ["libs/redis/src/*"],
+      "@libs/utilities": ["libs/utilities/src"],
+      "@libs/utilities/*": ["libs/utilities/src/*"]
+    }
+  }
+}
